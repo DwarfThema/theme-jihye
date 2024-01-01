@@ -2,8 +2,8 @@
 
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import VineteeScene from "./scenes/vineteeScene";
 import { Suspense, useEffect, useRef, useState } from "react";
+import OnsuScene from "./scenes/onsuScene";
 
 export default function Home() {
   const [scroll, setScroll] = useState(0);
@@ -14,7 +14,7 @@ export default function Home() {
         <Canvas shadows>
           <Environment preset="forest" background blur={0.15} />
           <Suspense fallback={null}>
-            <VineteeScene scroll={scroll} />
+            <OnsuScene scroll={scroll} />
           </Suspense>
         </Canvas>
       }
