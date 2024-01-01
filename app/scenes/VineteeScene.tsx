@@ -1,23 +1,9 @@
-import { EffectComposer, Vignette } from "@react-three/postprocessing";
-import { useControls } from "leva";
-import { BlendFunction } from "postprocessing";
+import OnsuModels from "../src/onsuModels";
 
-export default function VineteeScene() {
-  const { offset, darkness } = useControls({
-    offset: { value: 0.7, step: 0.1 },
-    darkness: { value: 50, step: 1 },
-  });
-
+export default function VineteeScene({ scroll }: { scroll: number }) {
   return (
     <>
-      <EffectComposer>
-        <Vignette
-          offset={offset}
-          darkness={darkness}
-          eskil={false}
-          blendFunction={BlendFunction.NORMAL}
-        />
-      </EffectComposer>
+      <OnsuModels scroll={scroll} />
     </>
   );
 }
