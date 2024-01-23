@@ -6,6 +6,7 @@ import {
   Loader,
   OrbitControls,
   SoftShadows,
+  useProgress,
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -14,8 +15,37 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useControls } from "leva";
 import { ACESFilmicToneMapping } from "three";
 
+export const ExportBoard = () => {
+  const [explainBoard, setExplainBoard] = useState(true);
+  const [explainBoardEnd, setExplainBoardEnd] = useState(false);
+
+  useEffect(() => {
+    if (explainBoard) {
+      setTimeout(() => {
+        setExplainBoard(false);
+      }, 2500);
+      setTimeout(() => {
+        setExplainBoardEnd(true);
+      }, 5000);
+    }
+  }, []);
+
+  return (
+    <div
+      className={`transition-opacity ease-in-out duration-[2000ms] fixed w-screen h-screen flex flex-col justify-center items-center font-semibold text-stone-950 ${
+        explainBoard ? "opacity-100" : "opacity-0"
+      } ${explainBoardEnd ? "hidden -z-10" : "z-30"}
+      `}
+    >
+      스크롤을 통해 이동하세요. <br />
+      Go through the scroll.
+    </div>
+  );
+};
+
 export default function Home() {
   const [scroll, setScroll] = useState(0);
+  const { loaded } = useProgress();
 
   /*   const { posx, posy, posz, inten } = useControls({
     posx: { step: 0.1, value: -5.5 },
@@ -25,7 +55,8 @@ export default function Home() {
   }); */
 
   return (
-    <main className="absolute h-screen w-screen items-center justify-center scrollbar-hide bg-black">
+    <main className="absolute h-screen w-screen items-center justify-center bg-black">
+      {loaded ? <ExportBoard /> : null}
       <Canvas
         shadows
         onCreated={({ gl }) => {
