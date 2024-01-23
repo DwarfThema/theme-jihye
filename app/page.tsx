@@ -12,23 +12,37 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import OnsuScene from "./scenes/onsuScene";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useControls } from "leva";
+import { ACESFilmicToneMapping } from "three";
 
 export default function Home() {
   const [scroll, setScroll] = useState(0);
 
+  /*   const { posx, posy, posz, inten } = useControls({
+    posx: { step: 0.1, value: -5.5 },
+    posy: { step: 0.1, value: 16.6 },
+    posz: { step: 0.1, value: 1.0 },
+    inten: { step: 0.1, value: 4.6 },
+  }); */
+
   return (
     <main className="absolute h-screen w-screen items-center justify-center scrollbar-hide bg-black">
-      <Canvas shadows>
-        <BakeShadows />
+      <Canvas
+        shadows
+        onCreated={({ gl }) => {
+          gl.toneMapping = ACESFilmicToneMapping;
+          gl.toneMappingExposure = 0.9;
+        }}
+      >
         <Environment preset="warehouse" />
         <SoftShadows size={10} focus={0} samples={20} />
 
         <directionalLight
           castShadow
-          position={[-9.3, 1.3, 2.5]}
-          intensity={2.0}
+          receiveShadow
+          position={[-5.5, 16.6, 1.0]}
+          intensity={4.6}
           shadow-mapSize={1024}
-          shadow-bias={-0.001}
+          shadow-bias={-0.002}
         >
           <orthographicCamera
             attach="shadow-camera"
@@ -39,6 +53,13 @@ export default function Home() {
         <Suspense fallback={null}>
           <OnsuScene scroll={scroll} />
         </Suspense>
+        <EffectComposer>
+          <Bloom
+            luminanceThreshold={0.5}
+            luminanceSmoothing={3}
+            intensity={2}
+          />
+        </EffectComposer>
       </Canvas>
       <Loader />
       <div
