@@ -1,11 +1,40 @@
-import { useGLTF, useAnimations, PerspectiveCamera } from "@react-three/drei";
+import {
+  useGLTF,
+  useAnimations,
+  PerspectiveCamera,
+  MeshReflectorMaterial,
+  Reflector,
+  Html,
+  useVideoTexture,
+} from "@react-three/drei";
 import { useFrame, useGraph } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
-import { AnimationAction, Group, Material, MathUtils, Mesh } from "three";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
+import {
+  AnimationAction,
+  CubeReflectionMapping,
+  CubeUVReflectionMapping,
+  Group,
+  Material,
+  MathUtils,
+  Mesh,
+  RepeatWrapping,
+  UVMapping,
+  Vector2,
+} from "three";
 
 export default function OnsuModels({ scroll }: { scroll: number }) {
+  const texture = useVideoTexture("/textures/video.mp4", {
+    muted: true,
+    loop: true,
+  });
+  useEffect(() => {
+    texture.wrapS = RepeatWrapping;
+    texture.wrapT = RepeatWrapping;
+  }, [texture]);
+
   const group = useRef();
-  const { scene, animations } = useGLTF("/models/Onsu.gltf");
+  const { scene, animations } = useGLTF("/models/Onsu.glb");
   const { actions, names } = useAnimations(animations, group);
 
   //Ref for Meshs
@@ -25,7 +54,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
     if (actions[names[0]]) {
       (actions[names[0]] as AnimationAction).play().paused = true;
     }
-  }, []);
+  }, [actions, names]);
 
   useFrame((state) => {
     const action = actions[names[0]] as AnimationAction;
@@ -35,44 +64,64 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
         action?.getClip().duration * scroll,
         0.05
       );
-      console.log(action.time);
     }
   });
 
   return (
-    <group ref={group as any}>
-      {onsuModelMeshs.map((mesh, index) => (
-        <mesh
-          key={index}
-          geometry={mesh.geometry}
-          material={mesh.material as Material}
-        />
-      ))}
+    <>
+      <group ref={group as any}>
+        {onsuModelMeshs.map((mesh, index) => {
+          if (mesh.name === "VideoWall") {
+            return (
+              <mesh
+                key={index}
+                geometry={mesh.geometry}
+                receiveShadow
+                castShadow
+              >
+                <meshStandardMaterial
+                  map={texture}
+                  emissiveMap={texture}
+                  emissiveIntensity={0.3}
+                  alphaHash
+                  transparent
+                />
+              </mesh>
+            );
+          }
+          if (mesh.name === "VideoBotReflect") {
+            return (
+              <mesh
+                key={index}
+                geometry={mesh.geometry}
+                material={mesh.material as Material}
+              ></mesh>
+            );
+          } else {
+            return (
+              <mesh
+                key={index}
+                geometry={mesh.geometry}
+                material={mesh.material as Material}
+                receiveShadow
+                castShadow
+              />
+            );
+          }
+        })}
 
-      <group name="Camera_Orientation">
-        <PerspectiveCamera
-          makeDefault
-          far={100}
-          near={0.1}
-          fov={60}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <directionalLight
-            castShadow
-            position={[10, 20, 15]}
-            shadow-camera-right={8}
-            shadow-camera-top={8}
-            shadow-camera-left={-8}
-            shadow-camera-bottom={-8}
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            intensity={2}
-            shadow-bias={-0.0001}
+        <group name="Camera_Orientation">
+          <PerspectiveCamera
+            makeDefault
+            far={100}
+            near={0.1}
+            fov={isMobile ? 80 : 60}
+            rotation={[0, 0, 0]}
           />
-        </PerspectiveCamera>
+        </group>
       </group>
-    </group>
+    </>
   );
 }
 
-useGLTF.preload("/models/model.glb");
+useGLTF.preload("/models/Onsu.glb");
