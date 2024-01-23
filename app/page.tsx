@@ -15,7 +15,7 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useControls } from "leva";
 import { ACESFilmicToneMapping } from "three";
 
-export const ExportBoard = () => {
+function ExportBoard() {
   const [explainBoard, setExplainBoard] = useState(true);
   const [explainBoardEnd, setExplainBoardEnd] = useState(false);
 
@@ -41,7 +41,7 @@ export const ExportBoard = () => {
       Go through the scroll.
     </div>
   );
-};
+}
 
 export default function Home() {
   const [scroll, setScroll] = useState(0);
