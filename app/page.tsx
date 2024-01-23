@@ -17,11 +17,11 @@ export default function Home() {
   const [scroll, setScroll] = useState(0);
 
   return (
-    <main className="flex h-screen w-screen items-center justify-center">
+    <main className="absolute h-screen w-screen items-center justify-center scrollbar-hide bg-black">
       <Canvas shadows>
         <BakeShadows />
-        {<Environment preset="warehouse" />}
-        {<SoftShadows size={10} focus={0} samples={20} />}
+        <Environment preset="warehouse" />
+        <SoftShadows size={10} focus={0} samples={20} />
 
         <directionalLight
           castShadow

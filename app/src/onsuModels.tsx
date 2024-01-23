@@ -68,59 +68,52 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
   });
 
   return (
-    <>
-      <group ref={group as any}>
-        {onsuModelMeshs.map((mesh, index) => {
-          if (mesh.name === "VideoWall") {
-            return (
-              <mesh
-                key={index}
-                geometry={mesh.geometry}
-                receiveShadow
-                castShadow
-              >
-                <meshStandardMaterial
-                  map={texture}
-                  emissiveMap={texture}
-                  emissiveIntensity={0.3}
-                  alphaHash
-                  transparent
-                />
-              </mesh>
-            );
-          }
-          if (mesh.name === "VideoBotReflect") {
-            return (
-              <mesh
-                key={index}
-                geometry={mesh.geometry}
-                material={mesh.material as Material}
-              ></mesh>
-            );
-          } else {
-            return (
-              <mesh
-                key={index}
-                geometry={mesh.geometry}
-                material={mesh.material as Material}
-                receiveShadow
-                castShadow
+    <group ref={group as any}>
+      {onsuModelMeshs.map((mesh, index) => {
+        if (mesh.name === "VideoWall") {
+          return (
+            <mesh key={index} geometry={mesh.geometry} receiveShadow castShadow>
+              <meshStandardMaterial
+                map={texture}
+                emissiveMap={texture}
+                emissiveIntensity={0.3}
+                alphaHash
+                transparent
               />
-            );
-          }
-        })}
+            </mesh>
+          );
+        }
+        if (mesh.name === "VideoBotReflect") {
+          return (
+            <mesh
+              key={index}
+              geometry={mesh.geometry}
+              material={mesh.material as Material}
+            ></mesh>
+          );
+        } else {
+          return (
+            <mesh
+              key={index}
+              geometry={mesh.geometry}
+              material={mesh.material as Material}
+              receiveShadow
+              castShadow
+            />
+          );
+        }
+      })}
 
-        <group name="Camera_Orientation">
-          <PerspectiveCamera
-            makeDefault
-            far={100}
-            near={0.1}
-            fov={isMobile ? 80 : 60}
-            rotation={[0, 0, 0]}
-          />
-        </group>
+      <group name="Camera_Orientation">
+        <PerspectiveCamera
+          makeDefault
+          far={100}
+          near={0.1}
+          fov={isMobile ? 80 : 60}
+          rotation={[0, 0, 0]}
+        />
       </group>
-    </>
+    </group>
   );
 }
 
