@@ -6,21 +6,18 @@ import {
   Reflector,
   Html,
   useVideoTexture,
+  useTexture,
 } from "@react-three/drei";
 import { useFrame, useGraph } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
 import {
   AnimationAction,
-  CubeReflectionMapping,
-  CubeUVReflectionMapping,
   Group,
   Material,
   MathUtils,
   Mesh,
   RepeatWrapping,
-  UVMapping,
-  Vector2,
 } from "three";
 
 export default function OnsuModels({ scroll }: { scroll: number }) {
