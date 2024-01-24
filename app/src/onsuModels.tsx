@@ -30,7 +30,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
     texture.wrapT = RepeatWrapping;
   }, [texture]);
 
-  const [
+  /*   const [
     artTex1,
     artTex2,
     artTex3,
@@ -65,7 +65,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
     "/textures/arts/art15.jpg",
     "/textures/arts/art16.jpg",
   ]);
-
+ */
   const group = useRef();
   const { scene, animations } = useGLTF("/models/Onsu.glb");
   const { actions, names } = useAnimations(animations, group);
