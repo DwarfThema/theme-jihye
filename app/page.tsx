@@ -31,10 +31,9 @@ function ExportBoard() {
       }, 5000);
     }
   }, [loaded, explainBoard, explainBoardEnd]);
-
   return (
     <div
-      className={`transition-opacity ease-in-out duration-[2000ms] fixed w-screen h-screen flex flex-col justify-center items-center font-semibold text-stone-950 ${
+      className={` transition-opacity ease-in-out duration-[2000ms] fixed font-semibold text-stone-950 ${
         explainBoard ? "opacity-100" : "opacity-0"
       } ${explainBoardEnd ? "hidden -z-10" : "z-30"}
       `}
@@ -58,7 +57,6 @@ export default function Home() {
 
   return (
     <main className="absolute h-screen w-screen items-center justify-center bg-black">
-      {loaded ? <ExportBoard /> : null}
       <Canvas
         shadows
         onCreated={({ gl }) => {
@@ -96,7 +94,7 @@ export default function Home() {
       </Canvas>
       <Loader />
       <div
-        className="snap-start select-none overflow-y-auto h-full w-full absolute top-0 left-0"
+        className="snap-start select-none overflow-y-auto h-full w-full absolute top-0 left-0 flex items-center justify-center"
         onScroll={(e) => {
           const target = e.target as HTMLElement;
           setScroll(
@@ -105,6 +103,7 @@ export default function Home() {
           console.log(scroll);
         }}
       >
+        {loaded ? <ExportBoard /> : null}
         <div style={{ height: "5000vh" }} />
       </div>
     </main>
