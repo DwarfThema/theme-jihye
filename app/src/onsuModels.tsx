@@ -338,7 +338,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
   );
 }
 
-useGLTF.preload("/models/Onsu.glb");
+useGLTF.preload("/models/Onsu.glb"); /* 
 useTexture.preload("/textures/arts/art1.jpg");
 useTexture.preload("/textures/arts/art2.jpg");
 useTexture.preload("/textures/arts/art3.jpg");
@@ -353,4 +353,4 @@ useTexture.preload("/textures/arts/art12.jpg");
 useTexture.preload("/textures/arts/art13.jpg");
 useTexture.preload("/textures/arts/art14.jpg");
 useTexture.preload("/textures/arts/art15.jpg");
-useTexture.preload("/textures/arts/art16.jpg");
+useTexture.preload("/textures/arts/art16.jpg"); */
