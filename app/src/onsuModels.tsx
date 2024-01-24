@@ -129,7 +129,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                 material={mesh.material as Material}
               ></mesh>
             );
-          } else if (mesh.name.includes("art")) {
+          } /* else if (mesh.name.includes("art")) {
             const vec2 = new Vector2(0.5, 0.5);
 
             const vecRepeat2 = new Vector2(1, 0);
@@ -311,7 +311,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                 </mesh>
               );
             }
-          } else {
+          } */ else {
             return (
               <mesh
                 key={index}
