@@ -30,12 +30,12 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
     texture.wrapT = RepeatWrapping;
   }, [texture]);
 
-  /*   const [
+  const [
     artTex1,
     artTex2,
     artTex3,
     artTex4,
-    artTex5,
+    artTex5 /* 
     artTex6,
     artTex8,
     artTex9,
@@ -47,13 +47,13 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
     artTex15,
     artTex16,
     artTex17,
-    artTex18,
+    artTex18, */,
   ] = useTexture([
     "/textures/arts/art1.jpg",
     "/textures/arts/art2.jpg",
     "/textures/arts/art3.jpg",
     "/textures/arts/art4.jpg",
-    "/textures/arts/art5.jpg",
+    "/textures/arts/art5.jpg" /* ,
     "/textures/arts/art6.jpg",
     "/textures/arts/art8.jpg",
     "/textures/arts/art9.jpg",
@@ -63,9 +63,8 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
     "/textures/arts/art13.jpg",
     "/textures/arts/art14.jpg",
     "/textures/arts/art15.jpg",
-    "/textures/arts/art16.jpg",
+    "/textures/arts/art16.jpg", */,
   ]);
- */
   const group = useRef();
   const { scene, animations } = useGLTF("/models/Onsu.glb");
   const { actions, names } = useAnimations(animations, group);
@@ -129,7 +128,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                 material={mesh.material as Material}
               ></mesh>
             );
-          } /* else if (mesh.name.includes("art")) {
+          } else if (mesh.name.includes("art")) {
             const vec2 = new Vector2(0.5, 0.5);
 
             const vecRepeat2 = new Vector2(1, 0);
@@ -189,7 +188,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                   <meshStandardMaterial map={artTex5} />
                 </mesh>
               );
-            } else if (mesh.name === "art6") {
+            } /* else if (mesh.name === "art6") {
               artTex6.wrapS = MirroredRepeatWrapping;
               artTex6.wrapT = MirroredRepeatWrapping;
               artTex6.offset = vecRepeat2;
@@ -310,8 +309,8 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                   <meshStandardMaterial map={artTex16} />
                 </mesh>
               );
-            }
-          } */ else {
+            } */
+          } else {
             return (
               <mesh
                 key={index}
@@ -338,13 +337,13 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
   );
 }
 
-useGLTF.preload("/models/Onsu.glb"); /* 
+useGLTF.preload("/models/Onsu.glb");
 useTexture.preload("/textures/arts/art1.jpg");
 useTexture.preload("/textures/arts/art2.jpg");
 useTexture.preload("/textures/arts/art3.jpg");
 useTexture.preload("/textures/arts/art4.jpg");
 useTexture.preload("/textures/arts/art5.jpg");
-useTexture.preload("/textures/arts/art6.jpg");
+/* useTexture.preload("/textures/arts/art6.jpg");
 useTexture.preload("/textures/arts/art8.jpg");
 useTexture.preload("/textures/arts/art9.jpg");
 useTexture.preload("/textures/arts/art10.jpg");
@@ -353,4 +352,4 @@ useTexture.preload("/textures/arts/art12.jpg");
 useTexture.preload("/textures/arts/art13.jpg");
 useTexture.preload("/textures/arts/art14.jpg");
 useTexture.preload("/textures/arts/art15.jpg");
-useTexture.preload("/textures/arts/art16.jpg"); */
+useTexture.preload("/textures/arts/art16.jpg");  */
