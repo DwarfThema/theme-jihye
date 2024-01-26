@@ -48,13 +48,6 @@ export default function Home() {
   const [scroll, setScroll] = useState(0);
   const { loaded } = useProgress();
 
-  /*   const { posx, posy, posz, inten } = useControls({
-    posx: { step: 0.1, value: -5.5 },
-    posy: { step: 0.1, value: 16.6 },
-    posz: { step: 0.1, value: 1.0 },
-    inten: { step: 0.1, value: 4.6 },
-  }); */
-
   return (
     <main className="absolute h-screen w-screen items-center justify-center bg-black">
       <Canvas
