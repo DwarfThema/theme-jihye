@@ -16,13 +16,13 @@ import { useControls } from "leva";
 import { ACESFilmicToneMapping } from "three";
 
 function ExportBoard() {
-  const { progress, loaded } = useProgress();
+  const { progress, loaded, active } = useProgress();
 
   const [explainBoard, setExplainBoard] = useState(true);
   const [explainBoardEnd, setExplainBoardEnd] = useState(false);
 
   useEffect(() => {
-    if (explainBoard && loaded) {
+    if (explainBoard && !active) {
       setTimeout(() => {
         setExplainBoard(false);
       }, 2500);
