@@ -94,6 +94,41 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                 />
               </mesh>
             );
+          } else if (mesh.name === "reflectionBot") {
+            return (
+              <>
+                {isMobile ? (
+                  <mesh
+                    key={index}
+                    geometry={mesh.geometry}
+                    material={mesh.material as Material}
+                    receiveShadow
+                    castShadow
+                  />
+                ) : (
+                  <mesh
+                    key={index}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    position={[7.34, 0.01, -7.1]}
+                  >
+                    <planeGeometry args={[10.3, 7.05]} />
+                    <MeshReflectorMaterial
+                      mirror={0}
+                      blur={[500, 800]}
+                      resolution={2048}
+                      mixBlur={1}
+                      mixStrength={80}
+                      roughness={1}
+                      depthScale={1.2}
+                      minDepthThreshold={0.4}
+                      maxDepthThreshold={1.4}
+                      color="#050505"
+                      metalness={1}
+                    />
+                  </mesh>
+                )}
+              </>
+            );
           } else if (mesh.name.includes("display")) {
             return (
               <mesh key={index} geometry={mesh.geometry}>
@@ -118,23 +153,6 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
             );
           }
         })}
-
-        {/*         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[7.34, 0.01, -7.1]}>
-          <planeGeometry args={[10.3, 7.05]} />
-          <MeshReflectorMaterial
-            mirror={0}
-            blur={[500, 800]}
-            resolution={2048}
-            mixBlur={1}
-            mixStrength={80}
-            roughness={1}
-            depthScale={1.2}
-            minDepthThreshold={0.4}
-            maxDepthThreshold={1.4}
-            color="#050505"
-            metalness={1}
-          />
-        </mesh> */}
 
         <group name="Camera_Orientation">
           <PerspectiveCamera
