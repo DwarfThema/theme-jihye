@@ -25,15 +25,15 @@ function ExportBoard() {
     if (explainBoard && !active) {
       setTimeout(() => {
         setExplainBoard(false);
-      }, 2500);
+      }, 3000);
       setTimeout(() => {
         setExplainBoardEnd(true);
-      }, 5000);
+      }, 7000);
     }
   }, [loaded, explainBoard, explainBoardEnd]);
   return (
     <div
-      className={` transition-opacity ease-in-out duration-[2000ms] fixed font-semibold text-stone-950 ${
+      className={` transition-opacity ease-in-out duration-[2500ms] fixed font-semibold text-stone-950 ${
         explainBoard ? "opacity-100" : "opacity-0"
       } ${explainBoardEnd ? "hidden -z-10" : "z-30"}
       `}
