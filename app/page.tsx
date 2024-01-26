@@ -100,7 +100,6 @@ export default function Home() {
           setScroll(
             target.scrollTop / (target.scrollHeight - window.innerHeight)
           );
-          console.log(scroll);
         }}
       >
         {loaded ? <ExportBoard /> : null}
