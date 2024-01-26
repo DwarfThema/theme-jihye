@@ -119,7 +119,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
           }
         })}
 
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[7.34, 0.01, -7.1]}>
+        {/*         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[7.34, 0.01, -7.1]}>
           <planeGeometry args={[10.3, 7.05]} />
           <MeshReflectorMaterial
             mirror={0}
@@ -134,7 +134,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
             color="#050505"
             metalness={1}
           />
-        </mesh>
+        </mesh> */}
 
         <group name="Camera_Orientation">
           <PerspectiveCamera
