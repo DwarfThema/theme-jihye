@@ -108,6 +108,13 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                 ) : (
                   <mesh
                     key={index}
+                    geometry={mesh.geometry}
+                    material={mesh.material as Material}
+                    receiveShadow
+                    castShadow
+                  />
+                  /*                   <mesh
+                    key={index}
                     rotation={[-Math.PI / 2, 0, 0]}
                     position={[7.34, 0.01, -7.1]}
                   >
@@ -125,7 +132,7 @@ export default function OnsuModels({ scroll }: { scroll: number }) {
                       color="#050505"
                       metalness={1}
                     />
-                  </mesh>
+                  </mesh> */
                 )}
               </>
             );
